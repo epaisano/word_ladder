@@ -2,6 +2,7 @@
 
 from collections import deque
 
+
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     '''
     Returns a list satisfying the following properties:
@@ -17,12 +18,14 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     ```
     may give the output
     ```
-    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny', 'benny', 'bonny', 'boney', 'money']
+    ['stone', 'shone', 'phone', 'phony', 'peony',
+    'penny', 'benny', 'bonny', 'boney', 'money']
     ```
     but the possible outputs are not unique,
     so you may also get the output
     ```
-    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots', 'hooty', 'hooey', 'honey', 'money']
+    ['stone', 'shone', 'shote', 'shots', 'soots',
+    'hoots', 'hooty', 'hooey', 'honey', 'money']
     ```
     (We cannot use doctests here because the outputs are not unique.)
 
@@ -40,9 +43,9 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     if start_word == end_word:
         return stack
     while len(ladder) != 0:
-        popped_stack=ladder.popleft()
-        for word in words:
-            if _adjacent(popped_stack[-1], word) == True:
+        popped_stack = ladder.popleft()
+        for word in list(words):
+            if _adjacent(popped_stack[-1], word):
                 if word == end_word:
                     popped_stack.append(end_word)
                     return popped_stack
@@ -51,7 +54,6 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
                 ladder.append(copy)
                 words.remove(word)
     return None
-
 
 
 def verify_word_ladder(ladder):
@@ -67,7 +69,7 @@ def verify_word_ladder(ladder):
     if len(ladder) != 0:
         count = 0
         for i in range(len(ladder)-1):
-            if _adjacent(ladder[i], ladder[i+1]) == True:
+            if _adjacent(ladder[i], ladder[i+1]):
                 count += 0
             else:
                 count += 1
